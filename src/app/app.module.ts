@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersComponent } from './pages/users/users.component';
+import { reducers } from './store';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { UsersComponent } from './pages/users/users.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([])
   ],
   providers: [],
