@@ -11,9 +11,11 @@ export interface UsersState {
 
 
 const initUsersState: UsersState = {
-    users: [],
+    users: [
+        {id: 1, name: 'yousef', email: 'gheibiyousef@gmail.com'}
+    ],
     selectedUser: null,
-    total: null
+    total: 1
 
 }
 export function usersReducer(state: UsersState = initUsersState, action: UsersActions): UsersState {
