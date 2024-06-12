@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AppState } from 'src/app/store';
-import { LoadUsers } from 'src/app/store/users/users.actions';
+import { LoadUsers, SelectUser } from 'src/app/store/users/users.actions';
+import { selectSelectedUser, selectUsers, selectUsersTotal } from 'src/app/store/users/users.reducer';
+import { UserModel } from './users.model';
 
 @Component({
   selector: 'app-users',
@@ -10,7 +13,23 @@ import { LoadUsers } from 'src/app/store/users/users.actions';
 })
 export class UsersComponent {
 
-  constructor(private _store: Store<AppState>){
-    this._store.dispatch(new LoadUsers({}))
+  users$: Observable<UserModel[]>;
+  total$: Observable<number>;
+  selectedUser$: Observable<UserModel>;
+
+  constructor(private _store: Store<AppState>) {
+    this._store.dispatch(new LoadUsers({}));
+    this.users$ = this._store.pipe(select(selectUsers));
+    this.total$ = this._store.pipe(select(selectUsersTotal));
+    this.selectedUser$ = this._store.pipe(select(selectSelectedUser))
+  }
+
+
+  selectUser(user: UserModel) {
+    this._store.dispatch(new SelectUser(user));
+  }
+
+  desectUser() {
+    this._store.dispatch(new SelectUser(null));
   }
 }
