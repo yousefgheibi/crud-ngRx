@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
-
+export type verbs = 'PUT' | 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 @Injectable({
     providedIn: 'root'
@@ -13,12 +13,27 @@ export class HttpService {
     constructor(private _http: HttpClient) { }
 
     get(url: string, relative: boolean = true) {
-        const endpoint = this.#baseApi + `/${url}`
-        return this._http.get(endpoint)
+        return this.request('GET', url, null, relative);
     }
 
     post<T = any>(url: string, params: T, relative: boolean = true) {
-        const endpoint = this.#baseApi + `/${url}`
-        return this._http.post(endpoint, params)
+        return this.request('POST', url, params, relative);
+    }
+
+    request<T = any>(type: verbs, url: string, params?: T, relative: boolean = true) {
+        if (relative) {
+            url = this.#baseApi + `/${url}`
+        }
+
+        switch (type) {
+            case 'GET':
+                return this._http.get<T>(url);
+            case 'POST':
+                return this._http.post(url, params);
+
+
+            default:
+                return this._http.get<T>(url);
+        }
     }
 }
