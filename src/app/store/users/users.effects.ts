@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UserService } from "src/app/pages/users/user.service";
-import { LoadUsers, LoadUsersDone, UsersActionType } from "./users.actions";
+import { DeleteUser, DeleteUserDone, LoadUsers, LoadUsersDone, UsersActionType } from "./users.actions";
 import { map, switchMap } from "rxjs";
 import { UserModel } from "src/app/pages/users/users.model";
 
@@ -21,6 +21,19 @@ export class UsersEffects {
                     })
                 ))
         ))
+
+
+    onDelete$ = createEffect(() => this.actions$
+        .pipe(
+            ofType(UsersActionType.DeleteUser),
+            switchMap((actions: DeleteUser) => this._service.delete(actions.payload)
+                .pipe(
+                    map(() => {
+                        return new DeleteUserDone(actions.payload)
+                    })
+                ))
+        ))
+
     constructor(private _service: UserService,
         private actions$: Actions) { }
 

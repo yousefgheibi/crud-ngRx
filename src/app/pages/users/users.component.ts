@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/store';
-import { LoadUsers, SelectUser } from 'src/app/store/users/users.actions';
+import { DeleteUser, LoadUsers, SelectUser } from 'src/app/store/users/users.actions';
 import { selectSelectedUser, selectUsers, selectUsersTotal } from 'src/app/store/users/users.reducer';
 import { UserModel } from './users.model';
 
@@ -32,4 +32,8 @@ export class UsersComponent {
   desectUser() {
     this._store.dispatch(new SelectUser(null));
   }
+
+  delete(id: number) {
+    this._store.dispatch(new DeleteUser(id));
+    }
 }
