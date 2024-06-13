@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpService } from 'src/app/services/http.service';
 
 
 @Injectable({
@@ -7,10 +7,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpService) { }
 
   load(){
-    return this._http.get('http://localhost:3000/users');
+    return this._http.get('users');
   }
 }
 

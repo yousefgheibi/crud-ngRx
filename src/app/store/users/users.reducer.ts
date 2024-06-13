@@ -13,12 +13,9 @@ export interface UsersState {
 
 
 const initUsersState: UsersState = {
-    users: [
-        { id: 1, name: 'yousef', email: 'gheibiyousef@gmail.com' },
-        { id: 2, name: 'mohsen', email: 'mohsen@gmail.com' }
-    ],
+    users: [],
     selectedUser: null,
-    total: 2
+    total: null
 
 }
 export function usersReducer(state: UsersState = initUsersState, action: UsersActions): UsersState {
@@ -31,6 +28,12 @@ export function usersReducer(state: UsersState = initUsersState, action: UsersAc
             return {
                 ...state,
                 selectedUser: action.payload
+            }
+        case UsersActionType.LoadUsersDone: 
+            return {
+                ...state,
+                users: action.payload,
+                total: action.payload.length
             }
         default: 
             return state;
