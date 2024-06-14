@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from 'src/app/store';
 import { UsersEffects } from 'src/app/store/users/users.effects';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([UsersEffects]),
     RouterModule.forChild(routes)
