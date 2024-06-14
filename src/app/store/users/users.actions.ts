@@ -11,6 +11,9 @@ export enum UsersActionType  {
 
     DeleteUser = '[USERS] delete user.',
     DeleteUserDone = '[USERS] delete user done.',
+
+    UpdateUser = '[USERS] update user.',
+    UpdateUserDone = '[USER] update user done.'
 }
 
 
@@ -46,6 +49,16 @@ export class DeleteUserDone implements Action {
     constructor(public payload : number){ }
 }
 
+export class UpdateUser implements Action {
+    readonly type: string = UsersActionType.UpdateUser; 
+    constructor(public payload : UserModel){ }
+}
+
+export class UpdateUserDone implements Action {
+    readonly type: string = UsersActionType.UpdateUserDone; 
+    constructor(public payload : UserModel){ }
+}
+
 export type UsersActions = 
     | LoadUsers
     | SelectUser
@@ -53,3 +66,5 @@ export type UsersActions =
     | LoadUsersFailed
     | DeleteUser
     | DeleteUserDone
+    | UpdateUser
+    | UpdateUserDone

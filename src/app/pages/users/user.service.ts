@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
+import { UserModel } from './users.model';
 
 
 @Injectable({
@@ -16,5 +17,10 @@ export class UserService {
   delete(id: number) {
     return this._http.delete(`users/${id}`);
   }
+
+  update(user: UserModel) {
+    return this._http.put(`users/${user.id}`,user);
+}
+
 }
 

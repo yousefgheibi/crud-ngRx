@@ -18,10 +18,14 @@ export class HttpService {
 
     delete<T = any>(url: string, params?: T, relative: boolean = true) {
         return this.request('DELETE', url, params, relative);
-      }
+    }
 
     post<T = any>(url: string, params: T, relative: boolean = true) {
         return this.request('POST', url, params, relative);
+    }
+
+    put<T = any>(url: string, params: T, relative: boolean = true) {
+        return this.request('PUT', url, params, relative);
     }
 
     request<T = any>(type: verbs, url: string, params?: T, relative: boolean = true) {
@@ -34,6 +38,8 @@ export class HttpService {
                 return this._http.get<T>(url);
             case 'POST':
                 return this._http.post(url, params);
+            case 'PUT':
+                return this._http.put(url, params);
             case 'DELETE':
                 const options = {
                     headers: new HttpHeaders({

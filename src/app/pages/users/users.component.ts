@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/store';
-import { DeleteUser, LoadUsers, SelectUser } from 'src/app/store/users/users.actions';
+import { DeleteUser, LoadUsers, SelectUser, UpdateUser } from 'src/app/store/users/users.actions';
 import { selectSelectedUser, selectUsers, selectUsersTotal } from 'src/app/store/users/users.reducer';
 import { UserModel } from './users.model';
 import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
@@ -45,7 +45,9 @@ export class UsersComponent {
   }
 
   updateUser() {
-    console.log(this.editForm.value)
+    const user: UserModel = this.editForm.value;
+    this._store.dispatch(new UpdateUser(user));
+
   }
 
   private buildEditForm() {
